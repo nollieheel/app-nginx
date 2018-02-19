@@ -31,6 +31,14 @@ server {
 server {
     listen <%= @port || 443 %> <%= lopts.join(' ') %>;
 
+<% ## @ssl = Hash for TLS/SSL values -%>
+<% ##        Example: -%>
+<% ##   :ssl => { -%>
+<% ##     :certificate     => '/path/to/certificate', -%>
+<% ##     :certificate_key => '/path/to/key', -%>
+<% ##     :dhparam         => node['app-nginx']['dhparam_path'], -%>
+<% ##     :cipher_suite    => 'medium', # either 'medium' or 'modern' -%>
+<% ##   } -%>
     ssl_certificate <%= @ssl[:certificate] %>;
     ssl_certificate_key <%= @ssl[:certificate_key] %>;
 <% if @ssl[:cipher_suite] == 'modern' -%>
@@ -47,9 +55,9 @@ server {
     ssl_session_cache shared:SSL:10m;
     ssl_dhparam <%= @ssl[:dhparam] %>;
 
-<% ## @add_headers = Hash of additional headers to be included -%>
+<% ## @res_headers = Hash of headers to be included in http response -%>
 <% ##                Defaults shown below: -%>
-<% aheaders = @add_headers || { -%>
+<% res_headers = @res_headers || { -%>
 <% #  'Strict-Transport-Security' => '"max-age=15758000;includeSubDomains"', -%>
 <%   'Strict-Transport-Security'         => '"max-age=15758000;"', -%>
 <%   'X-Frame-Options'                   => 'SAMEORIGIN', -%>
@@ -57,7 +65,7 @@ server {
 <%   'X-XSS-Protection'                  => '"1; mode=block"', -%>
 <%   'X-Permitted-Cross-Domain-Policies' => 'none' -%>
 <% } -%>
-<% aheaders.each do |header, value| -%>
+<% res_headers.each do |header, value| -%>
     add_header <%= header %> <%= value %>;
 <% end -%>
 
@@ -76,9 +84,9 @@ server {
     index <%= @index %>;
 <% end -%>
 
-<% if @auth -%>
-    auth_basic "<%= @auth[:msg] %>";
-    auth_basic_user_file <%= @auth[:user_file_path] %>;
+<% if @basic_auth -%>
+    auth_basic "<%= @basic_auth[:msg] %>";
+    auth_basic_user_file <%= @basic_auth[:user_file_path] %>;
 
 <% end -%>
 <% ## @access_log_options = Array of strings -%>
@@ -124,10 +132,6 @@ server {
     }
 
 <% end -%>
-<% ## @server_statements_1 = Additional server statements to be included -%>
-<% ( @server_statements_1 || [] ).each do |statement| -%>
-    <%= statement %>
-<% end -%>
 <% ## =========== -%>
 <% ## Example config for a basic PHP site: -%>
 <% ## -%>
@@ -160,13 +164,4 @@ server {
     }
 <% ## =========== -%>
 
-<% ## @server_statements_2 = Additional server statements to be included -%>
-<% ( @server_statements_2 || [] ).each do |statement| -%>
-    <%= statement %>
-<% end -%>
 }
-
-<% ## @http_statements = Additional http statements to be included -%>
-<% ( @http_statements || [] ).each do |statement| -%>
-<%= statement %>
-<% end -%>

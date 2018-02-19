@@ -3,7 +3,7 @@
 # Cookbook Name:: app-nginx
 # Recipe:: default
 #
-# Copyright (C) 2017, Earth U
+# Copyright (C) 2018, Earth U
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,4 +19,4 @@
 #
 
 include_recipe 'nginx'
-include_recipe "#{cookbook_name}::nginx_configure"
+include_recipe "#{cookbook_name}::configure"
