@@ -1,5 +1,5 @@
 #
-# Author:: Earth U (<iskitingbords @ gmail.com>)
+# Author:: Earth U (<iskitingbords@gmail.com>)
 # Cookbook Name:: app-nginx
 # Attribute:: default
 #
@@ -24,6 +24,17 @@ default['app-nginx']['dhparam_path'] =
   "#{node['app-nginx']['priv_dir']}/dhparam.pem" # set to false to disable
 default['app-nginx']['dh_modulus'] = 4096
 
+default['app-nginx']['basic_auth'] = [
+## Example:
+#  {
+#    :path => "#{node['app-nginx']['priv_dir']}/mysite.htpasswd",
+#    :creds => [ {
+#      :user => 'myuser',
+#      :pass => 'secretpasswd'
+#    } ]
+#  }
+]
+
 # Use ubuntu mainline versions. The 'version' attribute
 # is basically unused here. Whatever is latest on the repo is installed.
 default['nginx']['version']             = '1.13.8'
@@ -33,9 +44,6 @@ default['nginx']['repo_source']         = 'nginx'
 default['nginx']['upstream_repository'] =
   'http://nginx.org/packages/mainline/ubuntu'
 
-# Set pid file initially in accordance with Ubuntu 14.04 
-# nginx package's pid file. Otherwise, it fails to restart.
-default['nginx']['pid']                  = '/var/run/nginx.pid'
 default['nginx']['default_site_enabled'] = false
 
 default['nginx']['client_max_body_size']    = '10m'
@@ -47,10 +55,9 @@ default['nginx']['event']        = 'epoll'
 default['nginx']['multi_accept'] = false
 
 # Setting worker_processes to 'auto' will automatically
-# set the value to the number of CPUs. But we're going to 
-# set it to twice that.
+# set the value to the number of CPUs. But we add 1 to that.
 default['nginx']['worker_processes']     =
-  ( %x(grep ^processor /proc/cpuinfo | wc -l).to_i ) * 2
+  ( %x(grep ^processor /proc/cpuinfo | wc -l).to_i ) + 1
 # Either use `ulimit -n` (usually 1024) for worker_connections, or
 # set it to a much higher value, but not exceeding worker_rlimit_nofile.
 default['nginx']['worker_connections']   = 10000

@@ -1,7 +1,7 @@
 #
-# Author:: Earth U (<iskitingbords @ gmail.com>)
-# Cookbook Name:: app-nginx
-# Recipe:: basic_auth
+# Author:: Earth U (<iskitingbords@gmail.com>)
+# Cookbook Name:: test
+# Attribute:: default
 #
 # Copyright (C) 2018, Earth U
 #
@@ -16,17 +16,12 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
 
-include_recipe 'openssl::upgrade'
-
-( node['app-nginx']['basic_auth'] || [] ).each do |e|
-  template e[:path] do
-    source    'htpasswd.erb'
-    mode      0644
-    sensitive true
-    variables(
-      :creds => e[:creds]
-    )
-  end
-end
+default['app-nginx']['dh_modulus'] = 1024
+default['app-nginx']['basic_auth'] = [{
+  :path => "#{node['app-nginx']['priv_dir']}/test.htpasswd",
+  :creds => [{
+    :user => 'test',
+    :pass => 'password'
+  }]
+}]

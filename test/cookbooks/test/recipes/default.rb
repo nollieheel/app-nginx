@@ -1,7 +1,7 @@
 #
-# Author:: Earth U (<iskitingbords @ gmail.com>)
-# Cookbook Name:: app-nginx
-# Attribute:: basic_auth
+# Author:: Earth U (<iskitingbords@gmail.com>)
+# Cookbook Name:: test
+# Recipe:: default
 #
 # Copyright (C) 2018, Earth U
 #
@@ -18,12 +18,14 @@
 # limitations under the License.
 #
 
-default['app-nginx']['basic_auth'] = [
-#  {
-#    :path => "#{node['app-nginx']['priv_dir']}/mysite.htpasswd",
-#    :creds => [ {
-#      :user => 'myuser',
-#      :pass => 'secretpasswd'
-#    } ]
-#  }
-]
+include_recipe 'app-nginx'
+
+nginx_site 'test_site' do
+  template  'site.conf.erb'
+  variables(
+    :auth => {
+      :msg => 'Basic auth needed',
+      :path_pass => "#{node['app-nginx']['priv_dir']}/test.htpasswd"
+    }
+  )
+end

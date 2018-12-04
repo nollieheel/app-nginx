@@ -5,6 +5,7 @@ A wrapper cookbook that installs Nginx webserver.
 ## Supported Platforms
 
 Ubuntu 14.04
+Ubuntu 16.04
 
 ## Attributes
 
@@ -36,7 +37,7 @@ Ubuntu 14.04
   <tr>
     <td><tt>['app-nginx']['basic_auth']</tt></td>
     <td>Array</td>
-    <td>Describes the credentials to include in htpasswd files, and their locations. Only used by recipe 'basic_auth'. See usage below.</td>
+    <td>Describes the credentials to include in htpasswd files, and their locations. See usage below.</td>
     <td><tt>[]</tt></td>
   </tr>
 </table>
@@ -55,9 +56,9 @@ Include `app-nginx` in your node's `run_list`:
 }
 ```
 
-### app-nginx::basic_auth
+## Basic Auth Setup
 
-Creates htpasswd files for basic auth. Populate the needed attributes:
+To create htpasswd files for basic auth, populate the needed attributes before running the default recipe:
 
 ```ruby
 default['app-nginx']['basic_auth'] = [ {
@@ -68,8 +69,6 @@ default['app-nginx']['basic_auth'] = [ {
   } ]
 } ]
 ```
-
-Then add `app-nginx::basic_auth` in your node's run_list.
 
 ## Creating a Site
 
@@ -95,4 +94,4 @@ An example site template is included in this repo (app-nginx): [site.conf.erb](t
 
 ## License and Authors
 
-Author:: Earth U (<iskitingbords @ gmail.com>)
+Author:: Earth U (<iskitingbords@gmail.com>)
