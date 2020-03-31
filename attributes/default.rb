@@ -35,6 +35,18 @@ default['app-nginx']['basic_auth'] = [
 #  }
 ]
 
+default['app-nginx']['logrotate_opts'] = [
+  'daily',         'missingok',
+  'rotate 52',     'compress',
+  'delaycompress', 'notifempty',
+  'sharedscripts', "create 0640 #{node['nginx']['user']} adm",
+]
+default['app-nginx']['logrotate_post'] = <<EOF
+        if [ -f /var/run/nginx.pid ]; then
+            kill -USR1 `cat /var/run/nginx.pid`
+        fi
+EOF
+
 # Use ubuntu mainline versions. The 'version' attribute
 # is basically unused here. Whatever is latest on the repo is installed.
 default['nginx']['version']             = '1.13.8'

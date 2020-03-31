@@ -1,3 +1,7 @@
+## 2.0.1 - 2020-04-01
+### Fixed
+- Logrotate bug in Ubuntu 16.04 where new files are created under user 'nginx', with 'www-data' not being able to write to them.
+
 ## 2.0.0 - 2018-12-03
 ### Added
 - Support for Ubuntu 16.04.

@@ -6,7 +6,7 @@ description      'Just a wrapper for setting up Nginx webserver'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 source_url       'https://github.com/nollieheel/app-nginx'
 issues_url       'https://github.com/nollieheel/app-nginx/issues'
-version          '2.0.0'
+version          '2.0.1'
 
 depends 'nginx', '~> 9.0'
 depends 'openssl', '~> 8.5'

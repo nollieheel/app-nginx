@@ -1,0 +1,10 @@
+<%= @log_dir %>/*.log {
+<% @options.each do |i| -%>
+    <%= i %>
+<% end -%>
+<% if @postrotate -%>
+    postrotate
+<%= @postrotate %>
+    endscript
+<% end -%>
+}

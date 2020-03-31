@@ -20,6 +20,15 @@
 
 include_recipe 'openssl::upgrade'
 
+template '/etc/logrotate.d/nginx' do
+  source 'nginx.logrotate.erb'
+  variables(
+    log_dir:    node['nginx']['log_dir'],
+    options:    node['app-nginx']['logrotate_opts'],
+    postrotate: node['app-nginx']['logrotate_post'],
+  )
+end
+
 directory(node['app-nginx']['priv_dir']) { recursive true }
 
 if node['app-nginx']['dhparam_path']
