@@ -1,3 +1,11 @@
+# app_nginx CHANGELOG
+
+## 3.0.0 - 2021-10-21
+### Changed
+- Bunch of BREAKING changes
+- Renamed cookbook to `app_nginx`.
+- Made compatible with Chef 17.x
+
 ## 2.0.1 - 2020-04-01
 ### Fixed
 - Logrotate bug in Ubuntu 16.04 where new files are created under user 'nginx', with 'www-data' not being able to write to them.

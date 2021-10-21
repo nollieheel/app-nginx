@@ -1,15 +1,13 @@
-name             'app-nginx'
+name             'app_nginx'
 maintainer       'Earth U'
 maintainer_email 'iskitingbords@gmail.com'
-license          'Apache License'
+license          'Apache-2.0'
 description      'Just a wrapper for setting up Nginx webserver'
-long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 source_url       'https://github.com/nollieheel/app-nginx'
 issues_url       'https://github.com/nollieheel/app-nginx/issues'
-version          '2.0.1'
+version          '3.0.0'
 
-depends 'nginx', '~> 9.0'
-depends 'openssl', '~> 8.5'
+depends 'nginx', '~> 12.0.7'
 
-supports 'ubuntu', '14.04'
-supports 'ubuntu', '16.04'
+chef_version '>= 16.0'
+supports     'ubuntu', '20.04'
