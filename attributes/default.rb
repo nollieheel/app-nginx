@@ -29,7 +29,7 @@ default[cb]['auth_file'] = [
   # To create a basic auth file automatically,
   # follow these example values:
   # {
-  #   :auth_file => '/etc/nginx/conf.http.d/.htpasswd',
+  #   :auth_file => '/etc/nginx/.htpasswd',
   #   :users     => [
   #     {user: 'john', pass: 'secret'},
   #     {user: 'jane', pass: 'password'},
