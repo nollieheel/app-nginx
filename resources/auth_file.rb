@@ -32,7 +32,7 @@ action :create do
   template new_resource.path do
     cookbook 'app_nginx'
     source   'htpasswd.erb'
-    mode     '0644'
+    mode     '0640'
     variables(
       users: new_resource.users
     )

@@ -1,5 +1,9 @@
 # app_nginx CHANGELOG
 
+## 3.0.1 - 2021-11-12
+### Changed
+- Set basic auth file permissions to 0644
+
 ## 3.0.0 - 2021-10-21
 ### Changed
 - Bunch of BREAKING changes
