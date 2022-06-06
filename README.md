@@ -65,7 +65,7 @@ Ubuntu 20.04
   </tr>
 </table>
 
-** See `nginx_config` [documentation](https://github.com/sous-chefs/nginx/blob/12.0.7/documentation/nginx_config.md)
+** See `nginx_config` [documentation](https://github.com/sous-chefs/nginx/blob/12.0.12/documentation/nginx_config.md)
 
 ## Usage
 
@@ -88,7 +88,7 @@ end
 
 ## Creating a Site
 
-To create a site, use the standard `nginx_site` resource as described in cookbook [`nginx`](https://github.com/sous-chefs/nginx/blob/12.0.7/documentation/nginx_site.md).
+To create a site, use the standard `nginx_site` resource as described in cookbook [`nginx`](https://github.com/sous-chefs/nginx/blob/12.0.12/documentation/nginx_site.md).
 
 An example site template is included in this repo (app_nginx) for usage or reference: [site-template.erb](templates/default/site-template.erb).
 

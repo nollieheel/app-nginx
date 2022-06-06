@@ -22,6 +22,10 @@ property :path, String,
          description: 'Path to the basic auth file',
          name_property: true
 
+property :group, String,
+         description: 'Must have the same value as process_group cookbook attribute',
+         default: 'nginx'
+
 # Example :users property:
 #    [{ user: 'john', pass: 'secret' }]
 property :users, Array,
@@ -32,6 +36,8 @@ action :create do
   template new_resource.path do
     cookbook 'app_nginx'
     source   'htpasswd.erb'
+    owner    'root'
+    group    new_resource.group
     mode     '0640'
     variables(
       users: new_resource.users

@@ -7,7 +7,7 @@ source_url       'https://github.com/nollieheel/app-nginx'
 issues_url       'https://github.com/nollieheel/app-nginx/issues'
 version          '3.0.1'
 
-depends 'nginx', '~> 12.0.7'
+depends 'nginx', '~> 12.0.12'
 
 chef_version '>= 16.0'
 supports     'ubuntu', '20.04'
