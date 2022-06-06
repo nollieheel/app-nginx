@@ -1,8 +1,12 @@
 # app_nginx CHANGELOG
 
+## 3.0.2 - 2022-06-07
+### Fixed
+- Nginx worker cannot read .htpasswd file for basic auth.
+
 ## 3.0.1 - 2021-11-12
 ### Changed
-- Set basic auth file permissions to 0644
+- Set basic auth file permissions to 0640
 
 ## 3.0.0 - 2021-10-21
 ### Changed
