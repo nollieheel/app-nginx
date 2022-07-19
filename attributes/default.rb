@@ -24,7 +24,6 @@ default[cb]['sendfile']           = 'on'
 default[cb]['tcp_nopush']         = 'on'
 default[cb]['tcp_nodelay']        = 'on'
 default[cb]['keepalive_timeout']  = 30
-# process_user and process_group should be 'nginx'
 default[cb]['process_user']       = 'nginx'
 default[cb]['process_group']      = 'nginx'
 

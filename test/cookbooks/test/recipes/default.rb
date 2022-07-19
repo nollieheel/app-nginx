@@ -47,8 +47,18 @@ end
 nginx_site 'test_site' do
   cookbook cookbook_name
   template 'site-template.erb'
+  owner    vs['user']
+  group    vs['group']
   variables(
     root_dir:  vs['root_dir'],
     auth_file: vs['auth_file']
   )
+end
+
+app_nginx_log_perms '/var/log/nginx/*.log' do
+  owner vs['user']
+  initial_log_files [
+    'localhost.access.log',
+    'localhost.error.log',
+  ]
 end

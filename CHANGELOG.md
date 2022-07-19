@@ -1,5 +1,9 @@
 # app_nginx CHANGELOG
 
+## 3.1.0 - 2022-07-19
+### Added
+- Resource 'app_nginx_log_perms'. This fixes log file permissions issues post-install.
+
 ## 3.0.2 - 2022-06-07
 ### Fixed
 - Nginx worker cannot read .htpasswd file for basic auth.

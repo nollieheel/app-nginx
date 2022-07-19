@@ -85,7 +85,7 @@ app_nginx_auth_file '/etc/nginx/.htpasswd' do
   ]
 end
 ```
-
+### TODO: document 'log_perms' resource
 ## Creating a Site
 
 To create a site, use the standard `nginx_site` resource as described in cookbook [`nginx`](https://github.com/sous-chefs/nginx/blob/12.0.12/documentation/nginx_site.md).

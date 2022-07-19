@@ -1,0 +1,15 @@
+<%= @log_location %> {
+        daily
+        missingok
+        rotate 52
+        compress
+        delaycompress
+        notifempty
+        create 640 <%= @owner %> adm
+        sharedscripts
+        postrotate
+                if [ -f <%= @pid_file %> ]; then
+                        kill -USR1 `cat <%= @pid_file %>`
+                fi
+        endscript
+}
