@@ -24,7 +24,7 @@ property :path, String,
 
 property :group, String,
          description: 'Must have the same value as process_group cookbook attribute',
-         default: 'nginx'
+         default: 'www-data'
 
 # Example :users property:
 #    [{ user: 'john', pass: 'secret' }]

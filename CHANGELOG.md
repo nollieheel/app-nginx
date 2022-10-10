@@ -1,5 +1,10 @@
 # app_nginx CHANGELOG
 
+## 3.2.0 - 2022-10-11
+### Changed
+- Bumped nginx version dependency for bug fixes.
+- Reverted all default names/owners and groups from 'nginx' to 'www-data'.
+
 ## 3.1.0 - 2022-07-19
 ### Added
 - Resource 'app_nginx_log_perms'. This fixes log file permissions issues post-install.

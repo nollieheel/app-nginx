@@ -56,7 +56,6 @@ nginx_site 'test_site' do
 end
 
 app_nginx_log_perms '/var/log/nginx/*.log' do
-  owner vs['user']
   initial_log_files [
     'localhost.access.log',
     'localhost.error.log',

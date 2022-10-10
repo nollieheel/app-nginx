@@ -25,7 +25,7 @@ property :log_location, String,
 
 property :owner, String,
          description: "Owner of log files. Group will always be set to 'adm'.",
-         default: 'nginx'
+         default: 'www-data'
 
 property :pid_file, String,
          description: 'Nginx PID file',
@@ -35,6 +35,11 @@ property :log_config_location, String,
          description: 'Location of logrotate config file',
          default: '/etc/logrotate.d/nginx'
 
+# Seems like there is a small delay before a site config is fully generated
+# through the nginx_site resource, and the site's initial log files are
+# created. Running app_nginx_log_perms immediately after may not affect them,
+# that's why this property exists, to force the creation of those
+# initial log files.
 property :initial_log_files, Array,
          description: 'Optional list of log files to be initialized '\
                       'in the log_location.',

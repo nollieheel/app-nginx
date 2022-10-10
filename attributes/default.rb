@@ -24,8 +24,8 @@ default[cb]['sendfile']           = 'on'
 default[cb]['tcp_nopush']         = 'on'
 default[cb]['tcp_nodelay']        = 'on'
 default[cb]['keepalive_timeout']  = 30
-default[cb]['process_user']       = 'nginx'
-default[cb]['process_group']      = 'nginx'
+default[cb]['process_user']       = 'www-data'
+default[cb]['process_group']      = 'www-data'
 
 default[cb]['conf_cookbook'] = cb
 default[cb]['conf_variables'] = {
