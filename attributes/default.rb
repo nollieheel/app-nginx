@@ -2,7 +2,7 @@
 # Cookbook:: app_nginx
 # Attribute:: default
 #
-# Copyright:: 2021, Earth U
+# Copyright:: 2022, Earth U
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,17 +18,19 @@
 
 cb = 'app_nginx'
 
-default[cb]['worker_processes']   = 'auto'
-default[cb]['worker_connections'] = 1_024
-default[cb]['sendfile']           = 'on'
-default[cb]['tcp_nopush']         = 'on'
-default[cb]['tcp_nodelay']        = 'on'
-default[cb]['keepalive_timeout']  = 30
-default[cb]['process_user']       = 'www-data'
-default[cb]['process_group']      = 'www-data'
-
-default[cb]['conf_cookbook'] = cb
-default[cb]['conf_variables'] = {
+# Attributes fed directly as properties to nginx_config resource:
+default[cb]['process_user']        = 'www-data'
+default[cb]['process_group']       = 'www-data'
+default[cb]['worker_processes']    = 'auto'
+default[cb]['worker_connections']  = 1_024
+default[cb]['sendfile']            = 'on'
+default[cb]['tcp_nopush']          = 'on'
+default[cb]['tcp_nodelay']         = 'on'
+default[cb]['keepalive_timeout']   = 60
+default[cb]['types_hash_max_size'] = 2_048
+default[cb]['conf_cookbook']       = cb
+default[cb]['conf_template']       = 'nginx.conf.erb'
+default[cb]['conf_variables']      = {
   server_tokens:             'off',
   keepalive_requests:        500,
   client_body_buffer_size:   '64k',

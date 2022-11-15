@@ -2,7 +2,7 @@
 # Cookbook:: app_nginx
 # Resource:: auth_file
 #
-# Copyright:: 2021, Earth U
+# Copyright:: 2022, Earth U
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,15 +16,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+cb = 'app_nginx'
+
 unified_mode true
 
 property :path, String,
          description: 'Path to the basic auth file',
          name_property: true
-
-property :group, String,
-         description: 'Must have the same value as process_group cookbook attribute',
-         default: 'www-data'
 
 # Example :users property:
 #    [{ user: 'john', pass: 'secret' }]
@@ -34,10 +32,10 @@ property :users, Array,
 
 action :create do
   template new_resource.path do
-    cookbook 'app_nginx'
+    cookbook cb
     source   'htpasswd.erb'
     owner    'root'
-    group    new_resource.group
+    group    node[cb]['process_group']
     mode     '0640'
     variables(
       users: new_resource.users

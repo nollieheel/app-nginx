@@ -2,7 +2,7 @@
 # Cookbook:: app_nginx
 # Recipe:: default
 #
-# Copyright:: 2021, Earth U
+# Copyright:: 2022, Earth U
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,8 @@
 # limitations under the License.
 
 vs = node[cookbook_name]
-apt_update if platform_family?('debian')
+
+apt_update
 
 nginx_install 'nginx' do
   source     'repo'
@@ -34,7 +35,9 @@ nginx_config 'nginx' do
   tcp_nopush           vs['tcp_nopush']
   tcp_nodelay          vs['tcp_nodelay']
   keepalive_timeout    vs['keepalive_timeout']
+  types_hash_max_size  vs['types_hash_max_size']
   conf_cookbook        vs['conf_cookbook']
+  conf_template        vs['conf_template']
   conf_variables       vs['conf_variables']
   notifies             :reload, 'nginx_service[nginx]', :delayed
 end

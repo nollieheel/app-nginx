@@ -2,7 +2,7 @@
 # Cookbook:: test
 # Recipe:: default
 #
-# Copyright:: 2021, Earth U
+# Copyright:: 2022, Earth U
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,20 +16,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# So Inspec can use node attributes
+ruby_block 'save node attribs' do
+  block do
+    ::File.write('/tmp/kitchen_chef_node.json', node.to_json)
+  end
+end
+
 vs = node[cookbook_name]
 
 include_recipe 'app_nginx'
 
-app_nginx_auth_file vs['auth_file'] do
-  users [{
-    user: vs['auth_user'],
-    pass: vs['auth_pass'],
-  }]
-end
-
 directory vs['root_dir'] do
-  owner     vs['user']
-  group     vs['group']
   mode      '0755'
   recursive true
   notifies  :create, 'file[index]', :immediately
@@ -38,26 +36,25 @@ end
 file 'index' do
   path    "#{vs['root_dir']}/index.html"
   content 'Hello World'
-  owner   vs['user']
-  group   vs['group']
   mode    '0644'
   action  :nothing
 end
 
 nginx_site 'test_site' do
   cookbook cookbook_name
-  template 'site-template.erb'
-  owner    vs['user']
-  group    vs['group']
   variables(
-    root_dir:  vs['root_dir'],
-    auth_file: vs['auth_file']
+    root_dir:   vs['root_dir'],
+    auth_file:  node['app_nginx']['auth_file'][0]['auth_file'],
+    access_log: vs['access_log'],
+    error_log:  vs['error_log']
   )
 end
 
-app_nginx_log_perms '/var/log/nginx/*.log' do
+app_nginx_log_perms 'logs' do
   initial_log_files [
-    'localhost.access.log',
-    'localhost.error.log',
+    'access.log',
+    'error.log',
+    vs['access_log'],
+    vs['error_log'],
   ]
 end

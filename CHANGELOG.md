@@ -1,5 +1,14 @@
 # app_nginx CHANGELOG
 
+## 4.0.0 - 2022-11-17
+### Changed
+- Upgraded nginx cookbook dependency for security fixes.
+- log_location is no longer the name property of app_nginx_log_perms resource.
+
+### Added
+- Update README.md
+- Tests
+
 ## 3.2.0 - 2022-10-11
 ### Changed
 - Bumped nginx version dependency for bug fixes.

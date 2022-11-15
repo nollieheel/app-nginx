@@ -2,7 +2,7 @@
 # Cookbook:: test
 # Attribute:: default
 #
-# Copyright:: 2021, Earth U
+# Copyright:: 2022, Earth U
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,10 +16,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-default['test']['auth_file'] = '/etc/nginx/.htpasswd'
-default['test']['auth_user'] = 'tester'
-default['test']['auth_pass'] = 'password'
+default['test']['root_dir']   = '/var/www/local'
+default['test']['access_log'] = '/var/log/nginx/localhost.access.log'
+default['test']['error_log']  = '/var/log/nginx/localhost.error.log'
 
-default['test']['user'] = 'www-data'
-default['test']['group'] = node['test']['user']
-default['test']['root_dir'] = '/var/www/local'
+default['app_nginx']['auth_file'] = [{
+  auth_file: '/etc/nginx/htpasswd',
+  users:     [{ user: 'tester', pass: 'password' }],
+}]
