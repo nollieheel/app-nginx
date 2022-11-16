@@ -23,7 +23,7 @@ end
 
 basicuser = av['auth_file'][0]['users'][0]['user']
 basicpass = av['auth_file'][0]['users'][0]['pass']
-describe http('http://localhost', auth: {user: basicuser, pass: basicpass}) do
+describe http('http://localhost', auth: { user: basicuser, pass: basicpass }) do
   its('status') { should eq 200 }
   its('body') { should eq 'Hello World' }
 end
