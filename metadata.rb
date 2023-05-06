@@ -5,7 +5,7 @@ license          'Apache-2.0'
 description      'Just a wrapper for setting up Nginx webserver'
 source_url       'https://github.com/nollieheel/app-nginx'
 issues_url       'https://github.com/nollieheel/app-nginx/issues'
-version          '4.0.0'
+version          '4.0.1'
 
 depends 'nginx', '~> 12.1.0'
 

@@ -63,7 +63,6 @@ server {
 <%   'Strict-Transport-Security'         => '"max-age=15758000;"', -%>
 <%   'X-Frame-Options'                   => 'SAMEORIGIN', -%>
 <%   'X-Content-Type-Options'            => 'nosniff', -%>
-<%   'X-XSS-Protection'                  => '"1; mode=block"', -%>
 <%   'X-Permitted-Cross-Domain-Policies' => 'none' -%>
 <% } -%>
 <% res_headers.each do |header, value| -%>

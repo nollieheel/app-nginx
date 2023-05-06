@@ -1,5 +1,9 @@
 # app_nginx CHANGELOG
 
+## 4.0.1 - 2023-05-06
+### Removed
+- Non-standard X-XSS-Protection header from sample site templates.
+
 ## 4.0.0 - 2022-11-17
 ### Changed
 - Upgraded nginx cookbook dependency for security fixes.
