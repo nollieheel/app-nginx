@@ -1,5 +1,12 @@
 # app_nginx CHANGELOG
 
+## 5.0.0 - 2024-05-10
+### Breaking changes
+- Removed support for Ubuntu 20.04
+
+### Added
+- Overwrote nginx repo listing in apt
+
 ## 4.0.1 - 2023-05-06
 ### Removed
 - Non-standard X-XSS-Protection header from sample site templates.

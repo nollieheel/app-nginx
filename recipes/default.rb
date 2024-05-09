@@ -2,7 +2,7 @@
 # Cookbook:: app_nginx
 # Recipe:: default
 #
-# Copyright:: 2022, Earth U
+# Copyright:: 2024, Earth U
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,11 +18,25 @@
 
 vs = node[cookbook_name]
 
-apt_update
-
 nginx_install 'nginx' do
   source     'repo'
   repo_train 'mainline'
+end
+
+# override repo listing
+
+file '/etc/apt/sources.list.d/nginx.list' do
+  action :delete
+end
+
+add_apt 'nginx-mainline' do
+  keyserver    false
+  key          'https://nginx.org/keys/nginx_signing.key'
+  key_dearmor  true
+  uri          'https://nginx.org/packages/mainline/ubuntu'
+  distribution node['lsb']['codename']
+  components   ['nginx']
+  deb_src      true
 end
 
 nginx_config 'nginx' do
