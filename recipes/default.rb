@@ -18,18 +18,7 @@
 
 vs = node[cookbook_name]
 
-nginx_install 'nginx' do
-  source     'repo'
-  repo_train 'mainline'
-end
-
-# override repo listing
-
-file '/etc/apt/sources.list.d/nginx.list' do
-  action :delete
-end
-
-add_apt 'nginx-mainline' do
+add_apt 'nginx' do
   keyserver    false
   key          'https://nginx.org/keys/nginx_signing.key'
   key_dearmor  true
@@ -38,6 +27,8 @@ add_apt 'nginx-mainline' do
   components   ['nginx']
   deb_src      true
 end
+
+package 'nginx'
 
 nginx_config 'nginx' do
   default_site_enabled false

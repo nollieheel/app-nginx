@@ -1,5 +1,9 @@
 # app_nginx CHANGELOG
 
+## 5.1.0 - 2024-05-12
+### Changed
+- Skipped adding repo from `nginx` community cookbook
+
 ## 5.0.0 - 2024-05-10
 ### Breaking changes
 - Removed support for Ubuntu 20.04
