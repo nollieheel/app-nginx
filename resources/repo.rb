@@ -18,6 +18,8 @@
 
 # Set up Nginx repo
 
+cb = 'app_nginx'
+
 unified_mode true
 
 property :cache_rebuild, [true, false],
@@ -60,6 +62,7 @@ action :configure do
     key_array = ::File.readlines(tmp_key, chomp: true)
 
     template '/etc/apt/sources.list.d/nginx.sources' do
+      cookbook cb
       variables(
         uri:           new_resource.uri,
         suite:         node['lsb']['codename'],

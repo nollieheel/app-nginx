@@ -1,5 +1,9 @@
 # app_nginx CHANGELOG
 
+## 5.2.1 - 2024-08-11
+### Fixed
+- Missing template error
+
 ## 5.2.0 - 2024-08-11
 ### Added
 - Added app_nginx_repo resource to give an option of loading the repo separately
