@@ -1,5 +1,9 @@
 # app_nginx CHANGELOG
 
+## 5.2.0 - 2024-08-11
+### Added
+- Added app_nginx_repo resource to give an option of loading the repo separately
+
 ## 5.1.0 - 2024-05-12
 ### Changed
 - Skipped adding repo from `nginx` community cookbook

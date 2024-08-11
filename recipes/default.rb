@@ -16,44 +16,5 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-vs = node[cookbook_name]
-
-add_apt 'nginx' do
-  keyserver    false
-  key          'https://nginx.org/keys/nginx_signing.key'
-  key_dearmor  true
-  uri          'https://nginx.org/packages/mainline/ubuntu'
-  distribution node['lsb']['codename']
-  components   ['nginx']
-  deb_src      true
-end
-
-package 'nginx'
-
-nginx_config 'nginx' do
-  default_site_enabled false
-  process_user         vs['process_user']
-  process_group        vs['process_group']
-  worker_processes     vs['worker_processes']
-  worker_connections   vs['worker_connections']
-  sendfile             vs['sendfile']
-  tcp_nopush           vs['tcp_nopush']
-  tcp_nodelay          vs['tcp_nodelay']
-  keepalive_timeout    vs['keepalive_timeout']
-  types_hash_max_size  vs['types_hash_max_size']
-  conf_cookbook        vs['conf_cookbook']
-  conf_template        vs['conf_template']
-  conf_variables       vs['conf_variables']
-  notifies             :reload, 'nginx_service[nginx]', :delayed
-end
-
-nginx_service 'nginx' do
-  action         :enable
-  delayed_action :start
-end
-
-vs['auth_file'].each do |a|
-  app_nginx_auth_file a[:auth_file] do
-    users a[:users]
-  end
-end
+app_nginx_repo 'app_nginx_repo'
+include_recipe 'app_nginx::install'

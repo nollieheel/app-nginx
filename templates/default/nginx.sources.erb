@@ -1,0 +1,12 @@
+Types: deb deb-src
+URIs: <%= @uri %>
+Suites: <%= @suite %>
+Components: nginx
+Signed-By:
+<% @raw_key_array.each do |l| -%>
+  <% if l == '' -%>
+ .
+  <% else -%>
+ <%= l %>
+  <% end -%>
+<% end -%>

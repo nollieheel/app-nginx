@@ -2,7 +2,7 @@
 # Cookbook:: app_nginx
 # Resource:: log_perms
 #
-# Copyright:: 2022, Earth U
+# Copyright:: 2024, Earth U
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,6 +20,11 @@ require 'pathname'
 cb = 'app_nginx'
 
 unified_mode true
+
+# Nginx process user in Ubuntu defaults to 'nginx'.
+#
+# If that user is modified (e.g. to 'www-data'), then both the logrotate config
+# and the existing log file ownerships have to be changed as well.
 
 # Seems like there is a small delay before a site config is fully generated
 # through the nginx_site resource, and the site's initial log files are

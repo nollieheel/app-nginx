@@ -95,7 +95,7 @@ LTS version of Ubuntu >= 22.04
   </tr>
 </table>
 
-** These attributes are fed directly into `nginx_config` as resource properties. See [documentation](https://github.com/sous-chefs/nginx/blob/12.2.9/documentation/nginx_config.md).
+** These attributes are fed directly into `nginx_config` as resource properties. See [documentation](https://github.com/sous-chefs/nginx/blob/12.2.10/documentation/nginx_config.md).
 
 ## Recipes
 
@@ -104,6 +104,27 @@ LTS version of Ubuntu >= 22.04
 To install, configure, and enable the nginx service, include `app_nginx::default` recipe in your node's run_list. Basic auth files are also optionally created.
 
 ## Resources
+
+### app_nginx_repo
+
+Set up Nginx repo in Ubuntu
+
+```
+app_nginx_repo 'nginx_repo' do
+  cache_rebuild false
+end
+```
+
+#### Actions
+
+- `configure` - Set up the repo
+
+#### Properties
+
+- `cache_rebuild` - Whether to update cache after adding repo. Default: true.
+- `key` - URI of repo key. Default: `https://nginx.org/keys/nginx_signing.key`.
+- `key_checksum` - SHA256sum of the downloaded key. Default: `55385da31d198fa6a5012d40ae98ecb272a6c4e8fffffba94719ffd3e87de37a`.
+- `uri` - URI of repo. Also determines whether the mainline version is used. Default: `https://nginx.org/packages/mainline/ubuntu`.
 
 ### app_nginx_auth_file
 
@@ -156,7 +177,7 @@ end
 
 ## Creating a Site
 
-To create a site, use the standard `nginx_site` resource as described in cookbook [`nginx`](https://github.com/sous-chefs/nginx/blob/12.2.9/documentation/nginx_site.md).
+To create a site, use the standard `nginx_site` resource as described in cookbook [`nginx`](https://github.com/sous-chefs/nginx/blob/12.2.10/documentation/nginx_site.md).
 
 An example site template is included in this repo (app_nginx) for usage or reference: [site-template.erb](templates/default/site-template.erb).
 
