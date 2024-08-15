@@ -74,6 +74,11 @@ action :fix do
     end
   end
 
+  directory ::File.dirname(new_resource.log_location) do
+    owner puser
+    group 'adm'
+  end
+
   execute 'fix_log_perms' do
     command "chown -R #{puser}:adm #{new_resource.log_location} "\
             "&& chmod -R 640 #{new_resource.log_location}"

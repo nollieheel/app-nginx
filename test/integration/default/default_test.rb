@@ -33,6 +33,11 @@ describe file('/etc/logrotate.d/nginx') do
   its('content') { should match /create 640 #{av['process_user']} adm/ }
 end
 
+describe directory('/var/log/nginx') do
+  its('owner') { should eq av['process_user'] }
+  its('group') { should eq 'adm' }
+end
+
 describe file('/var/log/nginx/access.log') do
   its('owner') { should eq av['process_user'] }
   its('group') { should eq 'adm' }

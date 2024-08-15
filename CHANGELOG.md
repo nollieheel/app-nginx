@@ -1,5 +1,9 @@
 # app_nginx CHANGELOG
 
+## 5.2.2 - 2024-08-16
+### Fixed
+- Nginx logging to ".log.1" instead of ".log" after a logrotate
+
 ## 5.2.1 - 2024-08-11
 ### Fixed
 - Missing template error
