@@ -1,5 +1,9 @@
 # app_nginx CHANGELOG
 
+## 6.0.0 - 2026-11-01
+### Changed
+- Now supports only Ubuntu 24.04 or 26.04.
+
 ## 5.2.2 - 2024-08-16
 ### Fixed
 - Nginx logging to ".log.1" instead of ".log" after a logrotate
