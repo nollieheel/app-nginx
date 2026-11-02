@@ -2,7 +2,7 @@
 # Cookbook:: app_nginx
 # Attribute:: default
 #
-# Copyright:: 2022, Earth U
+# Copyright:: 2026, Earth U
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -38,6 +38,10 @@ default[cb]['conf_variables']      = {
   reset_timedout_connection: 'on',
 }
 
+# !!! WARNING !!!
+# Passwords in :users must NOT contain a single quote (').
+# Each password is placed inside single quotes in a shell command
+# (openssl passwd) when the auth file is generated.
 default[cb]['auth_file'] = [
   # To create a basic auth file automatically,
   # follow these example values:

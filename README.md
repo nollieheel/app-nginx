@@ -4,7 +4,7 @@ A wrapper cookbook that installs Nginx webserver pre-configured for common usage
 
 ## Supported Platforms
 
-LTS version of Ubuntu >= 22.04
+LTS version of Ubuntu 24.04, 26.04
 
 ## Attributes
 
@@ -95,7 +95,7 @@ LTS version of Ubuntu >= 22.04
   </tr>
 </table>
 
-** These attributes are fed directly into `nginx_config` as resource properties. See [documentation](https://github.com/sous-chefs/nginx/blob/12.2.10/documentation/nginx_config.md).
+** These attributes are fed directly into `nginx_config` as resource properties. See [documentation](https://github.com/sous-chefs/nginx/blob/12.3.0/documentation/nginx_config.md).
 
 ## Recipes
 

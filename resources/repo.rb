@@ -2,7 +2,7 @@
 # Cookbook:: app_nginx
 # Resource:: repo
 #
-# Copyright:: 2024, Earth U
+# Copyright:: 2026, Earth U
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -38,40 +38,33 @@ property :uri, String,
          default: 'https://nginx.org/packages/mainline/ubuntu'
 
 action :configure do
-  if node['platform_version'] == '22.04'
-    add_apt 'nginx' do
-      keyserver     false
-      key           new_resource.key
-      key_checksum  new_resource.key_checksum
-      key_dearmor   true
-      uri           new_resource.uri
-      distribution  node['lsb']['codename']
-      components    ['nginx']
-      deb_src       true
-      cache_rebuild new_resource.cache_rebuild
-    end
-
-  elsif node['platform_version'] == '24.04'
-    tmp_key = "#{Chef::Config[:file_cache_path]}/nginx_signing.key"
-
-    remote_file tmp_key do
-      source   new_resource.key
-      checksum new_resource.key_checksum
-    end
-
-    key_array = ::File.readlines(tmp_key, chomp: true)
-
-    template '/etc/apt/sources.list.d/nginx.sources' do
-      cookbook cb
-      variables(
-        uri:           new_resource.uri,
-        suite:         node['lsb']['codename'],
-        raw_key_array: key_array
-      )
-    end
-
-    apt_update 'app_nginx' do
-      action :update
-    end if new_resource.cache_rebuild
+  unless %w(24.04 26.04).include?(node['platform_version'])
+    raise "app_nginx_repo supports only Ubuntu 24.04 and 26.04 (found: #{node['platform_version']})"
   end
+
+  tmp_key = "#{Chef::Config[:file_cache_path]}/nginx_signing.key"
+
+  remote_file tmp_key do
+    source   new_resource.key
+    checksum new_resource.key_checksum
+  end
+
+  key_array = ::File.readlines(tmp_key, chomp: true)
+
+  template '/etc/apt/sources.list.d/nginx.sources' do
+    cookbook cb
+    variables(
+      uri:           new_resource.uri,
+      suite:         node['lsb']['codename'],
+      raw_key_array: key_array
+    )
+  end
+
+  template '/etc/apt/preferences.d/99nginx' do
+    cookbook cb
+  end
+
+  apt_update 'app_nginx' do
+    action :update
+  end if new_resource.cache_rebuild
 end

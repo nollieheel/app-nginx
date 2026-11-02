@@ -2,7 +2,7 @@
 # Cookbook:: app_nginx
 # Resource:: log_perms
 #
-# Copyright:: 2024, Earth U
+# Copyright:: 2026, Earth U
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.

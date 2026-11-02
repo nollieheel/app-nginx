@@ -12,10 +12,10 @@ verifier:
   name: inspec
 
 platforms:
-  # Ubuntu 22.04 Jammy:
-  - name: jam
   # Ubuntu 24.04 Noble:
   - name: nob
+  # Ubuntu 26.04 Raccoon:
+  - name: rac
 
 suites:
   - name: default
